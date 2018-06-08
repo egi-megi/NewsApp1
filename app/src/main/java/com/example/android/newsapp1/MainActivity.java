@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int ARTICLE_LOADER_ID = 1;
 
     public static final String USGS_REQUEST_URL =
-            "https://content.guardianapis.com/search?q=architecture&from-date=2017-01-01&api-key=test";
+            "https://content.guardianapis.com/search?q=architecture&from-date=2017-01-01&api-key=test&show-tags=contributor";
 
     /**
      * Adapter for the list of earthquakes
@@ -58,16 +58,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         articleListView.setAdapter(mAdapter);
 
 
-        //  getSupportLoaderManager().initLoader(1, null, this).forceLoad();
-
-
         articleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Find the current earthquake that was clicked on
                 Article currentArticle = mAdapter.getItem(position);
 
-// Convert the String URL into a URI object (to pass into the Intent constructor)
+                // Convert the String URL into a URI object (to pass into the Intent constructor)
                 Uri articleUri = Uri.parse(currentArticle.getWebUrl());
 
                 // Create a new intent to view the earthquake URI
@@ -93,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             View progressBar = findViewById(R.id.loading_progress_bar);
             progressBar.setVisibility(View.GONE);
-            emptyPage.setText("No internet connection.");
+            emptyPage.setText(R.string.no_connection);
 
         }
     }
@@ -112,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         View progressBar = findViewById(R.id.loading_progress_bar);
         progressBar.setVisibility(View.GONE);
 
-        emptyPage.setText("No articles found.");
+        emptyPage.setText(R.string.no_article);
         // Clear the adapter of previous earthquake articles
         mAdapter.clear();
 
