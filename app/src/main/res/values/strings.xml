@@ -3,4 +3,9 @@
 
     <string name="no_connection">No internet connection.</string>
     <string name="no_article">No articles found.</string>
+
+    <string name="section_name">section name</string>
+    <string name="title">title</string>
+    <string name="date">date</string>
+    <string name="author">author</string>
 </resources>

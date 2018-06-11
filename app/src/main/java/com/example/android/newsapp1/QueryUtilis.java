@@ -1,9 +1,7 @@
 package com.example.android.newsapp1;
 
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,16 +16,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.StringJoiner;
 
 /**
  * Created by egi-megi on 07.06.18.
  */
 
 public class QueryUtilis {
-    /** Tag for the log messages */
+
+    /**
+     * Tag for the log messages
+     */
     public static final String LOG_TAG = QueryUtilis.class.getSimpleName();
 
     private QueryUtilis() {
@@ -46,10 +45,10 @@ public class QueryUtilis {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        // Extract relevant fields from the JSON response and create an {@link Event} object
+        // Extract relevant fields from the JSON response and create an {@link Article} object
         List<Article> articles = extractFeatureFromJson(jsonResponse);
 
-        // Return the {@link Event}
+        // Return the list of {@link Article} objects
         return articles;
     }
 
@@ -96,7 +95,7 @@ public class QueryUtilis {
             }
 
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results."+e.getMessage(), e);
+            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results." + e.getMessage(), e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -136,7 +135,7 @@ public class QueryUtilis {
             return null;
         }
 
-        // Create an empty ArrayList that we can start adding earthquakes to
+        // Create an empty ArrayList that we can start adding articles to
         List<Article> articles = new ArrayList<>();
 
         // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
@@ -157,29 +156,23 @@ public class QueryUtilis {
                 String sectionName = art.getString("sectionName");
                 String publicationDate = art.getString("webPublicationDate");
                 String webUrl = art.getString("webUrl");
-                JSONArray contributors=art.getJSONArray("tags");
-                StringBuilder sb=new StringBuilder();
+                JSONArray contributors = art.getJSONArray("tags");
+                StringBuilder sb = new StringBuilder();
 
                 for (int j = 0; j < contributors.length(); j++) {
-                    if (j!=0 ) sb.append(", ");
+                    if (j != 0) sb.append(", ");
 
                     sb.append(contributors.getJSONObject(j).getString("webTitle"));
                 }
 
-                String authorsString=sb.toString();
+                String authorsString = sb.toString();
 
                 Article article = new Article(title, sectionName, publicationDate, webUrl, authorsString);
 
-                // adding contact to contact list
+                // Adding contact to contact list
                 articles.add(article);
-
-                // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
-                // build up a list of Article objects with the corresponding data.
             }
         } catch (JSONException e) {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
             Log.e("QueryUtilis", "Problem parsing the earthquake JSON results", e);
         }
 

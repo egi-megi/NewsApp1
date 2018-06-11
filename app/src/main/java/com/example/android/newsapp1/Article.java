@@ -16,8 +16,7 @@ public class Article {
 
     private String mAuthors;
 
-    public Article(String title, String sectionName, String publicationDate, String webUrl, String authors)
-    {
+    public Article(String title, String sectionName, String publicationDate, String webUrl, String authors) {
         mTitle = title;
         mSectionName = sectionName;
         mPublicationDate = publicationDate;

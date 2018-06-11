@@ -11,10 +11,6 @@ import java.util.List;
 
 public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
 
-    /** Tag for log messages */
-    private static final String LOG_TAG = ArticleLoader.class.getName();
-
-    /** Query URL */
     private String mUrl;
 
     public ArticleLoader(Context context, String url) {
@@ -33,7 +29,7 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
             return null;
         }
         // Create URL object
-        // Perform the HTTP request for earthquake data and process the response.
+        // Perform the HTTP request for article data and process the response.
         List<Article> article = QueryUtilis.fetchArticleData(mUrl);
         // Update the information displayed to the user.
         return article;
