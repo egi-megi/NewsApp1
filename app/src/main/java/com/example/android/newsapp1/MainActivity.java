@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int ARTICLE_LOADER_ID = 1;
 
     public static final String USGS_REQUEST_URL =
-            "https://content.guardianapis.com/search?q=architecture&from-date=2017-01-01&api-key=test&show-tags=contributor";
+            "https://content.guardianapis.com/search?q=architecture&from-date=2017-01-01&api-key=21bb4e65-d7b8-4e81-ae28-632e388ed476&show-tags=contributor";
 
     /**
      * Adapter for the list of articles
